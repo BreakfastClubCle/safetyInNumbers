@@ -1,12 +1,12 @@
 <template>
 <div class="card">
-    <form>
+    <form @submit.prevent="submitData">
         <h3>Submit Your Report</h3>
         <p>Latitude:  {{coords.lat}}</p>
         <p>Longitude: {{coords.lng}} </p>
 
         <div> {{ userTime }} </div>
-        <button type="submit" @click="submitData">Submit</button> 
+        <button type="submit">Submit</button> 
         <button type="button" @click="$emit('changeComp', 'leaf-map')">Cancel</button>
         
     </form>
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
   name: 'ReportForm',
   props: {
@@ -22,43 +22,33 @@ export default {
       type: Object,
       default: () => ({ lat: 0, lng: 0 })
     },
-    currComp : 'report-form'
+    currComp: 'report-form'
   },
-    data () {
+  data () {
     return {
       userLat: 0,
       userLng: 0,
       userTime: new Date(),
-      runCancel : 'report-form'
+      runCancel: 'report-form'
     }
   },
-  computed: {
-  ...mapState(['userLat', 'userLng', 'userTime'])
-},
   methods: {
-    ...mapMutations(['userLat', 'userLng', 'userTime']),
+    ...mapActions(['saveReport']),
     zoomUpdate (zoom) {
       this.zoom = zoom
     },
     centerUpdate (center) {
       this.center = center
     },
-    submitData() {
-        console.log("hello the submitData method was called"),
-        this.userLat = this.coords.lat
-        this.userLng = this.coords.lng
-        console.log(this.userLat + " Lat")
-        console.log(this.userLng + " Lng")
-    },
-    cancelButton() {
-        console.log("cancel was pressed. now it redirects")
+    submitData () {
+      this.userLat = this.coords.lat
+      this.userLng = this.coords.lng
+
+      this.saveReport({ lat: this.userLat, lng: this.userLng })
     }
-      
   }
 }
 </script>
-
-
 
 <style scoped>
 

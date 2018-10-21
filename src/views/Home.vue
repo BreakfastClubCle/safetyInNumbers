@@ -30,7 +30,7 @@
       enableLocation,
       reportForm
     },
-    data() {
+    data () {
       return {
         coords: {},
         currComp: 'Loading',
@@ -39,16 +39,16 @@
       }
     },
     methods: {
-      zoomUpdate(zoom) {
+      zoomUpdate (zoom) {
         this.zoom = zoom
       },
-      centerUpdate(center) {
+      centerUpdate (center) {
         this.center = center
       },
-      popupClick() {
+      popupClick () {
         console.log('Popup Click!')
       },
-      updatePos({
+      updatePos ({
         coords
       }) {
         this.coords = {
@@ -56,27 +56,25 @@
           lng: coords.longitude
         }
         this.currComp = 'leaf-map'
-        this.loading= false
+        this.loading = false
       },
-      noLocation() {
+      noLocation () {
         this.currComp = 'enable-location'
         this.loading = false
         this.erroring = true
         // Set the view to enable location
       },
-      startReport() {
+      startReport () {
         this.currComp = 'report-form'
         this.message = 'lets crowdshare some flames'
         console.log('report a fire button clicked')
       },
-      changeComp(comp) {
+      changeComp (comp) {
         this.currComp = comp
       }
-
-
     },
 
-    mounted() {
+    mounted () {
       window.navigator.geolocation.getCurrentPosition(this.updatePos, this.noLocation)
     }
   }

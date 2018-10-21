@@ -8,7 +8,7 @@
       <l-tile-layer
         :url="url"
         :attribution="attribution"/>
-      <l-marker :lat-lng="marker">
+      <l-marker v-for="(i, coords) in reports" :key="i" :lat-lng="convert(coords)">
       </l-marker>
     </l-map>
     <div class="button-area">
@@ -19,6 +19,7 @@
 
 <script>
 // @ is an alias to /src
+import { mapActions, mapState } from 'vuex'
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
@@ -45,7 +46,14 @@ export default {
       marker: L.latLng(this.coords.lat, this.coords.lng)
     }
   },
+  computed: {
+    ...mapState(['reports'])
+  },
   methods: {
+    ...mapActions(['fetchReports']),
+    convert (coords) {
+      return L.latlng(coords.lat, coords.lng)
+    },
     zoomUpdate (zoom) {
       this.zoom = zoom
     },
@@ -55,6 +63,10 @@ export default {
     popupClick () {
       console.log('Popup Click!')
     }
+  },
+
+  mounted () {
+    this.fetchReports()
   }
 }
 </script>
