@@ -5,7 +5,7 @@
         <label for="#pinLocation">Location</label>
         <input id="pinLoction" v-model="marker">
 
-        <span> {{ new Date()}} </span>
+        <div> {{ new Date()}} </div>
         <button type="submit" onClick="processReport">Confirm</button> <button type="reset">Reset</button>
     </form>
 </div>
@@ -23,11 +23,28 @@ export default {
 
 
 <style scoped>
+#exitForm {
+    float: right
+}
+
+form {
+    clear: both;
+}
+label {
+    display: block
+}
 input {
     width: 80%;
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
     border: 2px solid #333;
+}
+
+button {
+    color: #eee;
+    background-color: navy;
+    padding: 10px;
+    font-size: 16pt;
 }
 </style>
