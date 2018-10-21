@@ -33,8 +33,7 @@ export default {
       center: L.latLng(47.413220, -1.219482),
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      marker: L.latLng(47.413220, -1.219482),
-      currentCenter: L.latLng(47.413220, -1.219482)
+      marker: L.latLng(47.413220, -1.219482)
     }
   },
   methods: {
@@ -42,7 +41,7 @@ export default {
       this.zoom = zoom
     },
     centerUpdate (center) {
-      this.currentCenter = center
+      this.center = center
     },
     popupClick () {
       console.log('Popup Click!')
@@ -52,7 +51,6 @@ export default {
 
       this.center = converted
       this.marker = converted
-      this.currentCenter = converted
       this.zoom = 13
     }
   },
