@@ -11,6 +11,10 @@
       <l-marker :lat-lng="marker">
       </l-marker>
     </l-map>
+    <div>
+ <button v-on:click="startReport">Report a Fire</button>
+ <p> {{message}} </p>
+    </div>
   </div>
 </template>
 
@@ -19,6 +23,8 @@
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
+
+
 
 export default {
   name: 'home',
@@ -30,10 +36,12 @@ export default {
   data () {
     return {
       zoom: 13,
-      center: L.latLng(47.413220, -1.219482),
+      center: L.latLng(0, 0),
       url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      marker: L.latLng(47.413220, -1.219482)
+      marker: L.latLng(0, 0),
+      message: "Hello",
+
     }
   },
   methods: {
@@ -52,6 +60,11 @@ export default {
       this.center = converted
       this.marker = converted
       this.zoom = 13
+    },
+    startReport () {
+      this.message = "lets crowdshare some flames"
+      console.log("report a fire button clicked")
+   
     }
   },
 
