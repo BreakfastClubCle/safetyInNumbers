@@ -9,6 +9,7 @@ html {
 body {
   font-family: Arial, Helvetica, sans-serif;
   margin: 0 auto;
+  background-image: linear-gradient(#c1272d, #000000);
 }
 
 /* Grid */
@@ -22,6 +23,7 @@ body {
                        'aside foot';
   grid-template-rows: 64px 1fr auto;
   grid-template-columns: 10% 90%;
+  
 }
 
 header {

@@ -2,7 +2,7 @@
   <div class="home">
     <div v-if="!loading">
       <div v-if="!erroring">
-        <component :coords="coords" :is="currComp">
+        <component :coords="coords" :is="currComp" @changeComp="changeComp">
         </component>
       </div>
       <div v-else>
@@ -12,8 +12,7 @@
     <h1 v-else>Just piecing things together please hold...</h1>
 
     <div>
-      <button @click="currComp = 'report-form'">Report a Fire</button>
-      <p> {{message}} </p>
+    
     </div>
   </div>
 </template>
@@ -34,7 +33,6 @@
     data() {
       return {
         coords: {},
-        message: 'Hello',
         currComp: 'Loading',
         loading: true,
         erroring: false
@@ -70,7 +68,11 @@
         this.currComp = 'report-form'
         this.message = 'lets crowdshare some flames'
         console.log('report a fire button clicked')
+      },
+      changeComp(comp) {
+        this.currComp = comp
       }
+
 
     },
 

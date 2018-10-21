@@ -11,6 +11,9 @@
       <l-marker :lat-lng="marker">
       </l-marker>
     </l-map>
+    <div class="button-area">
+      <button @click="$emit('changeComp', 'report-form')">Report a Fire</button>
+      </div>
   </div>
 </template>
 
@@ -55,3 +58,25 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+
+#app {
+    background-image: linear-gradient(#c1272d, #000000);
+}
+
+.button-area {
+    text-align: center;
+}
+
+button {
+    color: #000;
+    background-color: #FF8C00;
+    padding: 10px;
+    font-size: 16pt;
+    margin: 15px;
+}
+button:hover {
+    background-color: #d37400;
+}
+</style>

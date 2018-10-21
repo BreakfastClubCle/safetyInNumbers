@@ -1,45 +1,64 @@
 <template>
 <div class="card">
-    <span id="exitForm" onClick="exitForm">X</span>
     <form>
-        <label for="#pinLocation">Location</label>
-        <input id="pinLoction" v-model="marker">
+        <h3>Submit Your Report</h3>
+        <p>Latitude:  {{coords.lat}}</p>
+        <p>Longitude: {{coords.lng}} </p>
 
-        <div> {{ new Date()}} </div>
-        <button type="submit" onClick="processReport">Confirm</button> <button type="reset">Reset</button>
+        <div> {{ userTime }} </div>
+        <button type="button" @click="submitData">Submit</button> 
+        <button type="button" @click="$emit('changeComp', 'leaf-map')">Cancel</button>
+        
     </form>
 </div>
 </template>
 
 <script>
 export default {
-    //this comment is just so i can push
-    //create processReport method here
-    //submit data to db and show a success message
-    //create method called exitForm so someone could abandon the process and hide this window
-    //create reset so user could reset their pin to their location grabbed by the browser (if they dragged it around by moving the map and dont want to submit that)
+  name: 'ReportForm',
+  props: {
+    coords: {
+      type: Object,
+      default: () => ({ lat: 0, lng: 0 })
+    },
+    currComp : 'report-form'
+  },
+    data () {
+    return {
+      userLat: 0,
+      userLng: 0,
+      userTime: new Date(),
+      runCancel : 'report-form'
+    }
+  },
+  methods: {
+    zoomUpdate (zoom) {
+      this.zoom = zoom
+    },
+    centerUpdate (center) {
+      this.center = center
+    },
+    submitData() {
+        console.log("hello the submitData method was called"),
+        this.userLat = this.coords.lat
+        this.userLng = this.coords.lng
+        console.log(this.userLat + " Lat")
+        console.log(this.userLng + " Lng")
+    },
+    cancelButton() {
+        console.log("cancel was pressed. now it redirects")
+    }
+  }
 }
 </script>
 
 
 
 <style scoped>
-#exitForm {
-    float: right
-}
 
-form {
-    clear: both;
-}
-label {
-    display: block
-}
-input {
-    width: 80%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 2px solid #333;
+.card {
+    background-color: #fff;
+    padding: 16px;
 }
 
 button {
@@ -47,5 +66,9 @@ button {
     background-color: navy;
     padding: 10px;
     font-size: 16pt;
+    margin: 15px;
+}
+button:hover {
+    background-color: gray;
 }
 </style>
