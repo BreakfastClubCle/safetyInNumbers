@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 export default {
   name: 'ReportForm',
   props: {
@@ -32,6 +32,7 @@ export default {
       runCancel: 'report-form'
     }
   },
+  computed: mapState(['currCoords']),
   methods: {
     ...mapActions(['saveReport']),
     zoomUpdate (zoom) {
@@ -44,7 +45,7 @@ export default {
       this.userLat = this.coords.lat
       this.userLng = this.coords.lng
 
-      this.saveReport({ lat: this.userLat, lng: this.userLng })
+      this.saveReport()
     }
   }
 }

@@ -39,18 +39,7 @@
       }
     },
     methods: {
-      zoomUpdate (zoom) {
-        this.zoom = zoom
-      },
-      centerUpdate (center) {
-        this.center = center
-      },
-      popupClick () {
-        console.log('Popup Click!')
-      },
-      updatePos ({
-        coords
-      }) {
+      updatePos ({ coords }) {
         this.coords = {
           lat: coords.latitude,
           lng: coords.longitude

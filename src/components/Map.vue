@@ -8,8 +8,7 @@
       <l-tile-layer
         :url="url"
         :attribution="attribution"/>
-      <l-marker v-for="(i, coords) in reports" :key="i" :lat-lng="convert(coords)">
-      </l-marker>
+      <l-marker :lat-lng="marker" />
     </l-map>
     <div class="button-area">
       <button @click="$emit('changeComp', 'report-form')">Report a Fire</button>
@@ -19,7 +18,7 @@
 
 <script>
 // @ is an alias to /src
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapMutations } from 'vuex'
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
@@ -50,23 +49,24 @@ export default {
     ...mapState(['reports'])
   },
   methods: {
+    ...mapMutations(['updateCoords']),
     ...mapActions(['fetchReports']),
     convert (coords) {
-      return L.latlng(coords.lat, coords.lng)
+      return L.latLng(coords.lat, coords.lng)
     },
     zoomUpdate (zoom) {
       this.zoom = zoom
     },
     centerUpdate (center) {
+      console.log(center)
       this.center = center
-    },
-    popupClick () {
-      console.log('Popup Click!')
+      this.updateCoords(center)
     }
   },
 
   mounted () {
-    this.fetchReports()
+    this.updateCoords(this.coords)
+    // this.fetchReports()
   }
 }
 </script>
