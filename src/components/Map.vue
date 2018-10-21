@@ -61,9 +61,7 @@ export default {
 
 <style scoped>
 
-#app {
-    background-image: linear-gradient(#c1272d, #000000);
-}
+
 
 .button-area {
     text-align: center;

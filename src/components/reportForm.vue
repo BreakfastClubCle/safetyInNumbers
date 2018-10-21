@@ -6,7 +6,7 @@
         <p>Longitude: {{coords.lng}} </p>
 
         <div> {{ userTime }} </div>
-        <button type="button" @click="submitData">Submit</button> 
+        <button type="submit" @click="submitData">Submit</button> 
         <button type="button" @click="$emit('changeComp', 'leaf-map')">Cancel</button>
         
     </form>
@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex'
 export default {
   name: 'ReportForm',
   props: {
@@ -31,7 +32,11 @@ export default {
       runCancel : 'report-form'
     }
   },
+  computed: {
+  ...mapState(['userLat', 'userLng', 'userTime'])
+},
   methods: {
+    ...mapMutations(['userLat', 'userLng', 'userTime']),
     zoomUpdate (zoom) {
       this.zoom = zoom
     },
@@ -48,6 +53,7 @@ export default {
     cancelButton() {
         console.log("cancel was pressed. now it redirects")
     }
+      
   }
 }
 </script>
@@ -63,12 +69,12 @@ export default {
 
 button {
     color: #eee;
-    background-color: navy;
+    background-color: #FF8C00;
     padding: 10px;
     font-size: 16pt;
     margin: 15px;
 }
 button:hover {
-    background-color: gray;
+    background-color: #d37400;
 }
 </style>
